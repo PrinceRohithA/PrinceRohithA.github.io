@@ -108,6 +108,13 @@ button,
   transition: box-shadow 240ms ease;
 }
 
+.site-header,
+.site-header.is-scrolled,
+.site-header a {
+  color: var(--paper);
+  background: var(--night);
+}
+
 .site-header.is-scrolled {
   box-shadow: 0 10px 28px rgba(12, 13, 16, 0.28);
 }
@@ -694,7 +701,11 @@ button:focus-visible {
 }
 
 .contact {
+  position: relative;
+  z-index: 1;
+  margin-top: -72px;
   min-height: calc(100vh - var(--header));
+  padding-top: calc(var(--header) + 32px + 72px);
   color: var(--paper);
   background:
     radial-gradient(circle at 80% 20%, rgba(200, 245, 66, 0.12), transparent 30%),

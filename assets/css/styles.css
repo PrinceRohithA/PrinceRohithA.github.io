@@ -30,7 +30,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header);
 }
 
 body {
@@ -461,7 +460,7 @@ button:focus-visible {
 }
 
 .section {
-  padding: 88px 28px;
+  padding: calc(var(--header) + 32px) 28px 88px;
   background: var(--paper);
 }
 

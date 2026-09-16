@@ -37,7 +37,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--night);
   font-family: var(--sans);
   font-size: 16px;
   line-height: 1.6;
@@ -458,6 +458,11 @@ button:focus-visible {
 
 .section {
   padding: 88px 28px;
+  background: var(--paper);
+}
+
+.tone-warm {
+  background: var(--paper-2);
 }
 
 .section-inner {

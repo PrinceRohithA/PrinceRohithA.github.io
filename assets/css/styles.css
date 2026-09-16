@@ -690,11 +690,6 @@ button:focus-visible {
   color: var(--ember);
 }
 
-.section,
-.hero {
-  scroll-margin-top: var(--header);
-}
-
 .contact {
   min-height: calc(100vh - var(--header));
   color: var(--paper);

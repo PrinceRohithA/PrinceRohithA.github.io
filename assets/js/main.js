@@ -10,37 +10,11 @@
     year.textContent = String(new Date().getFullYear());
   }
 
-  const darkSurfaces = document.querySelectorAll(".hero, .contact, .site-footer");
-  const visibleDark = new Set();
   const setHeaderState = () => {
-    header?.classList.toggle("is-scrolled", visibleDark.size === 0);
+    header?.classList.toggle("is-scrolled", window.scrollY > 8);
   };
-
-  if (header && darkSurfaces.length && "IntersectionObserver" in window) {
-    const darkObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) visibleDark.add(entry.target);
-          else visibleDark.delete(entry.target);
-        });
-        setHeaderState();
-      },
-      { threshold: 0, rootMargin: "0px 0px -82% 0px" }
-    );
-    darkSurfaces.forEach((surface) => darkObserver.observe(surface));
-  } else if (header) {
-    const update = () => {
-      const y = window.scrollY + 40;
-      const overDark = [...darkSurfaces].some((el) => {
-        const top = el.offsetTop;
-        const bottom = top + el.offsetHeight;
-        return y >= top && y < bottom;
-      });
-      header.classList.toggle("is-scrolled", !overDark);
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-  }
+  setHeaderState();
+  window.addEventListener("scroll", setHeaderState, { passive: true });
 
   const setMenu = (open) => {
     if (!toggle || !mobileNav) return;

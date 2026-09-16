@@ -35,6 +35,7 @@ html {
 
 body {
   margin: 0;
+  padding-top: var(--header);
   overflow-x: hidden;
   color: var(--ink);
   background: var(--night);
@@ -90,19 +91,22 @@ button,
 }
 
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 40;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  height: var(--header);
   min-height: var(--header);
   padding: 0 28px;
   color: var(--paper);
   background: var(--night);
   border-bottom: 1px solid rgba(243, 238, 228, 0.08);
-  transition: background 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
+  transition: box-shadow 240ms ease;
 }
 
 .site-header.is-scrolled {

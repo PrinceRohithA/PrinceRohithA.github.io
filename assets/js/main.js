@@ -10,21 +10,36 @@
     year.textContent = String(new Date().getFullYear());
   }
 
-  const hero = document.querySelector(".hero");
-  const setHeaderState = (scrolled) => {
-    header?.classList.toggle("is-scrolled", scrolled);
+  const darkSurfaces = document.querySelectorAll(".hero, .contact, .site-footer");
+  const visibleDark = new Set();
+  const setHeaderState = () => {
+    header?.classList.toggle("is-scrolled", visibleDark.size === 0);
   };
 
-  if (header && hero && "IntersectionObserver" in window) {
-    const heroObserver = new IntersectionObserver(
-      ([entry]) => setHeaderState(!entry.isIntersecting),
-      { threshold: 0, rootMargin: "-72px 0px 0px 0px" }
+  if (header && darkSurfaces.length && "IntersectionObserver" in window) {
+    const darkObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleDark.add(entry.target);
+          else visibleDark.delete(entry.target);
+        });
+        setHeaderState();
+      },
+      { threshold: 0, rootMargin: "0px 0px -82% 0px" }
     );
-    heroObserver.observe(hero);
-  } else {
-    const onScroll = () => setHeaderState(window.scrollY > 72);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    darkSurfaces.forEach((surface) => darkObserver.observe(surface));
+  } else if (header) {
+    const update = () => {
+      const y = window.scrollY + 40;
+      const overDark = [...darkSurfaces].some((el) => {
+        const top = el.offsetTop;
+        const bottom = top + el.offsetHeight;
+        return y >= top && y < bottom;
+      });
+      header.classList.toggle("is-scrolled", !overDark);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
   }
 
   const setMenu = (open) => {

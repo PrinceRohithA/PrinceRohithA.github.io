@@ -30,6 +30,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: var(--header);
 }
 
 body {
@@ -99,8 +100,8 @@ button,
   min-height: var(--header);
   padding: 0 28px;
   color: var(--paper);
-  background: transparent;
-  border-bottom: 1px solid transparent;
+  background: var(--night);
+  border-bottom: 1px solid rgba(243, 238, 228, 0.08);
   transition: background 240ms ease, color 240ms ease, border-color 240ms ease, box-shadow 240ms ease;
 }
 
@@ -237,6 +238,8 @@ button:focus-visible {
 
 .hero {
   position: relative;
+  display: flex;
+  align-items: center;
   min-height: calc(100vh - var(--header));
   padding: 48px 28px 72px;
   color: var(--paper);
@@ -686,7 +689,13 @@ button:focus-visible {
   color: var(--ember);
 }
 
+.section,
+.hero {
+  scroll-margin-top: var(--header);
+}
+
 .contact {
+  min-height: calc(100vh - var(--header));
   color: var(--paper);
   background:
     radial-gradient(circle at 80% 20%, rgba(200, 245, 66, 0.12), transparent 30%),

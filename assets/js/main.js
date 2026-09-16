@@ -26,7 +26,8 @@
   const scrollToId = (id) => {
     const target = id && id !== "top" ? document.getElementById(id) : null;
     const top = target ? target.offsetTop : 0;
-    window.scrollTo({ top, behavior: "smooth" });
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
   };
 
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -51,11 +52,6 @@
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") setMenu(false);
-  });
-
-  toggle?.addEventListener("click", () => {
-    const open = toggle.getAttribute("aria-expanded") !== "true";
-    setMenu(open);
   });
 
   const revealItems = document.querySelectorAll(".reveal");

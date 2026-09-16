@@ -35,7 +35,7 @@ html {
 body {
   margin: 0;
   padding-top: var(--header);
-  overflow-x: hidden;
+  overflow-x: clip;
   color: var(--ink);
   background: var(--night);
   font-family: var(--sans);
@@ -109,10 +109,13 @@ button,
 }
 
 .site-header,
-.site-header.is-scrolled,
-.site-header a {
+.site-header.is-scrolled {
   color: var(--paper);
   background: var(--night);
+}
+
+.site-header a {
+  color: var(--paper);
 }
 
 .site-header.is-scrolled {
@@ -701,11 +704,7 @@ button:focus-visible {
 }
 
 .contact {
-  position: relative;
-  z-index: 1;
-  margin-top: -72px;
   min-height: calc(100vh - var(--header));
-  padding-top: calc(var(--header) + 32px + 72px);
   color: var(--paper);
   background:
     radial-gradient(circle at 80% 20%, rgba(200, 245, 66, 0.12), transparent 30%),

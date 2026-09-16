@@ -23,17 +23,39 @@
     document.body.classList.toggle("nav-open", open);
   };
 
+  const scrollToId = (id) => {
+    const target = id && id !== "top" ? document.getElementById(id) : null;
+    const top = target ? target.offsetTop : 0;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      const id = href ? href.slice(1) : "";
+      event.preventDefault();
+      setMenu(false);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          scrollToId(id);
+          history.pushState(null, "", href || "#");
+        });
+      });
+    });
+  });
+
   toggle?.addEventListener("click", () => {
     const open = toggle.getAttribute("aria-expanded") !== "true";
     setMenu(open);
   });
 
-  mobileNav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setMenu(false));
-  });
-
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") setMenu(false);
+  });
+
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    setMenu(open);
   });
 
   const revealItems = document.querySelectorAll(".reveal");
